@@ -16,21 +16,17 @@ namespace Tester
 
             string text;
 
-            using(StreamReader sr = new StreamReader(".\\хуй.txt"))
+            using(StreamReader sr = new StreamReader(".\\хуй.test"))
             {
                 text = sr.ReadToEnd();
             }
 
-            text = CaesarСypher.Coder(text.ToCharArray(), 3, Language.russian);
+            var result = CaesarСypher.FrequencyAnalysis(text, Language.russian);
 
-            Console.WriteLine(text);
-
-
-            var key = CaesarСypher.VzlomJopi(text, Language.russian);
-
-            text = CaesarСypher.Decoder(text.ToCharArray(), key, Language.russian);
-
-            Console.WriteLine(text);
+            foreach (var item in result.Keys)
+            {
+                Console.WriteLine($"Буква {item} значение {result[item]}");
+            }
 
 
             Console.ReadKey();

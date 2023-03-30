@@ -152,17 +152,6 @@ namespace CaesarСypherLib
             return min;
         }
 
-        private static double Avg(double[] values)
-        {
-            double sum = 0;
-            foreach (var item in values)
-            {
-                sum+= item;
-            }
-
-            return sum / values.Length;
-        }
-
 
         public static int VzlomJopi(string text, Language language)
         {
@@ -178,59 +167,32 @@ namespace CaesarСypherLib
                     break;
                 case Language.english:
                     dictionary = _englishDictiondry.ToCharArray();
+                    standard = new double[] { 8.17, 1.49, 2.78, 4.25, 12.7, 2.23, 2.02, 6.09, 6.97, 0.15, 0.77, 4.03, 2.41, 6.75, 7.51, 1.93, 0.1, 5.99, 6.33,
+                                9.06, 2.76, 0.98, 2.36, 0.15, 1.97, 0.07 };
                     break;
             }
 
 
+            var maxDeviations = new List<double>();
 
-            var deviation = new List<double>();
-            var avgDeviations = new List<double>();
-
-            for (int i = 0; i < dictionary.Length; i++)
+            for (int i = 0; i <= dictionary.Length; i++)
             {
-                text = Decoder(text.ToCharArray(), i, language);
+                var deviations = new List<double>();
+
+                text = Decoder(text.ToCharArray(), 1, language);
                 var frequency = FrequencyAnalysis(text, language);
 
                 foreach (var c in frequency.Keys)
                 {
-                    deviation.Add(standard[Array.IndexOf(dictionary, c)] - frequency[c]);
+                    deviations.Add(standard[Array.IndexOf(dictionary, c)] - frequency[c]);
                 }
 
-                avgDeviations.Add(MaxOf(deviation.ToArray()));
+                maxDeviations.Add(MaxOf(deviations.ToArray()));
 
 
             }
 
-            return Array.IndexOf(avgDeviations.ToArray(), MinOf(avgDeviations.ToArray()));
-        }
-
-
-        public static bool IsItOkay(double[] percents, Language language)
-        {
-            double[] standard = null;
-            bool okay = true;
-
-            switch (language)
-            {
-                case Language.russian:
-                    standard = new double[] { 8.01, 1.59, 4.54, 1.7, 2.98, 8.45, 0.04, 0.94, 1.65, 7.35, 1.21, 3.49, 4.4, 3.21, 6.7, 10.97, 2.81, 4.73, 5.47, 
-                                6.26, 2.62, 0.26, 0.97, 0.48, 1.44, 0.73, 0.36, 0.04, 1.9, 1.74, 0.32, 0.64, 2.01};
-                    break;
-                case Language.english:
-                    //dictionary = new double[] {};
-                    break;
-            }
-
-            for (int i = 0; i < standard.Length; i++)
-            {
-                if(percents[i] > standard[i] + 4 || percents[i] < standard[i] - 4)
-                {
-                    okay = false;
-                }
-            }
-
-            return okay;
-
+            return Array.IndexOf(maxDeviations.ToArray(), MinOf(maxDeviations.ToArray())) + 1;
         }
 
 

@@ -21,7 +21,7 @@ namespace CaesarСypherLib
         private static string _englishDictiondryUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
-        
+
         public static string Coder(char[] text, int key, Language language)
         {
 
@@ -114,7 +114,14 @@ namespace CaesarСypherLib
             {
                 if (char.IsLetter(c))
                 {
-                    count[c] += 1;
+                    try
+                    {
+                        count[c] += 1;
+                    }
+                    catch (System.Collections.Generic.KeyNotFoundException) 
+                    {
+                        throw new InvalidLanguageException(c);
+                    }
                 }
             }
 
@@ -153,8 +160,9 @@ namespace CaesarСypherLib
         }
 
 
-        public static int VzlomJopi(string text, Language language)
+        public static int VzlomJopi(string text, Language language, bool ignoreNotEnoughSymbolsException = false)
         {
+
             char[] dictionary = null;
             double[] standard = null;
 
@@ -172,6 +180,10 @@ namespace CaesarСypherLib
                     break;
             }
 
+            var frequency = FrequencyAnalysis(text, language);
+
+            if (!IsItOkay(frequency.Values.ToArray()) && !ignoreNotEnoughSymbolsException) throw new NotEnoughSymbolsException();
+
 
             var maxDeviations = new List<double>();
 
@@ -180,7 +192,7 @@ namespace CaesarСypherLib
                 var deviations = new List<double>();
 
                 text = Decoder(text.ToCharArray(), 1, language);
-                var frequency = FrequencyAnalysis(text, language);
+                frequency = FrequencyAnalysis(text, language);
 
                 foreach (var c in frequency.Keys)
                 {
@@ -195,10 +207,28 @@ namespace CaesarСypherLib
             return Array.IndexOf(maxDeviations.ToArray(), MinOf(maxDeviations.ToArray())) + 1;
         }
 
+        public static bool IsItOkay(double[] values)
+        {
+            int counter = 0;
+            foreach (var item in values)
+            {
+                if (item != 0) counter++;
+
+            }
+            Console.WriteLine(Math.Round((double)counter / values.Length, 1));
+
+            return (Math.Round((double)counter / values.Length, 1) >= 0.5);
+        }
+
+        public class NotEnoughSymbolsException : Exception
+        {
+            public NotEnoughSymbolsException() : base("В тексте недостаточно символов для точного взлома шифра."){ }
+        }
+
 
         public class InvalidLanguageException : Exception 
         {
-            public InvalidLanguageException(char c) : base("В алфавите выбранного языка нет символа " + c + $"(ASCII code: {Encoding.ASCII.GetBytes(c.ToString())[0]})") { }
+            public InvalidLanguageException(char c) : base("В алфавите выбранного языка нет символа " + c + $"(ASCII code: {Encoding.ASCII.GetBytes(c.ToString())[0]}).") { }
         }
     }
 }

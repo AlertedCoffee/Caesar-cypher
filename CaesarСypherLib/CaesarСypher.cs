@@ -10,10 +10,8 @@ namespace CaesarСypherLib
 {
     public enum Language { russian, english }
 
-    public class CaesarСypher
+    public static class CaesarСypher
     {
-        public string text;
-
         private static string _russianDictiondry = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         private static string _russianDictiondryUpper = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
@@ -24,6 +22,7 @@ namespace CaesarСypherLib
 
         public static string Coder(char[] text, int key, Language language)
         {
+
 
             char[] dictionary = null;
             char[] dictionaryUpper = null;

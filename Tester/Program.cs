@@ -23,7 +23,7 @@ namespace Tester
                     text = sr.ReadToEnd();
                 }
 
-                var lang = Language.russian;
+                var lang = Language.english;
 
                 var result = CaesarСypher.FrequencyAnalysis(text, lang);
 
@@ -37,7 +37,7 @@ namespace Tester
 
                 try
                 {
-                    var key = CaesarСypher.VzlomJopi(text, lang);
+                    var key = CaesarСypher.HackCypher(text, lang);
                     Console.WriteLine(key);
 
                     Console.WriteLine(CaesarСypher.Decoder(text.ToCharArray(), key, lang));
@@ -49,7 +49,7 @@ namespace Tester
                     var dialigResult = Console.ReadKey();
                     if (dialigResult.KeyChar == 'y') 
                     {
-                        var key = CaesarСypher.VzlomJopi(text, lang, true);
+                        var key = CaesarСypher.HackCypher(text, lang, true);
 
                         Console.WriteLine(CaesarСypher.Decoder(text.ToCharArray(), key, lang));
                     }

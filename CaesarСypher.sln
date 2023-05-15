@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caesar–°ypherLib", "Caesar–
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{CC148FBE-BB2D-4B29-9159-A45EF19526F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaesarCypher", "CaesarCypher\CaesarCypher.csproj", "{4E40B102-4D86-40E9-A74E-DA0B5869D5C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CC148FBE-BB2D-4B29-9159-A45EF19526F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC148FBE-BB2D-4B29-9159-A45EF19526F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC148FBE-BB2D-4B29-9159-A45EF19526F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E40B102-4D86-40E9-A74E-DA0B5869D5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E40B102-4D86-40E9-A74E-DA0B5869D5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E40B102-4D86-40E9-A74E-DA0B5869D5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E40B102-4D86-40E9-A74E-DA0B5869D5C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

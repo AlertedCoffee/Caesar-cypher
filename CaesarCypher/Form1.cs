@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Net.Mime.MediaTypeNames;
+using CaesarСypherLib;
 
 namespace CaesarCypher
 {
@@ -28,23 +29,48 @@ namespace CaesarCypher
             else EnterButton.Enabled = false;
         }
 
+
         private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fontDialog1.Font = richTextBox1.Font;
+            RichTextBox textBox = InputRichTextBox;
+
+            switch (_coursor)
+            {
+                case coursor.input:
+                    textBox = InputRichTextBox;
+                    break;
+                case coursor.output:
+                    textBox = OutputRichTextBox;
+                    break;
+            }
+
+            fontDialog1.Font = textBox.Font;
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Font = fontDialog1.Font;
+                textBox.Font = fontDialog1.Font;
             }
         }
 
         private void ColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            colorDialog1.Color = richTextBox1.ForeColor;
+            RichTextBox textBox = InputRichTextBox;
+
+            switch (_coursor)
+            {
+                case coursor.input:
+                    textBox = InputRichTextBox;
+                    break;
+                case coursor.output:
+                    textBox = OutputRichTextBox;
+                    break;
+            }
+
+            colorDialog1.Color = textBox.ForeColor;
 
             if (colorDialog1.ShowDialog()== DialogResult.OK)
             {
-                richTextBox1.ForeColor = colorDialog1.Color;
+                textBox.ForeColor = colorDialog1.Color;
             }
         }
 
@@ -77,9 +103,9 @@ namespace CaesarCypher
                 MessageBox.Show("Ошибка чтения файла.\n" + exc.Message, "Взлома шифра Цезаря", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            richTextBox1.Text = text;
+            InputRichTextBox.Text = text;
 
-            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            InputRichTextBox.SelectionStart = InputRichTextBox.TextLength;
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,12 +117,69 @@ namespace CaesarCypher
                 
                 using (FileStream fs = new FileStream(_filePath, FileMode.Create))
                 {
-                    byte[] Text = Encoding.UTF8.GetBytes(richTextBox1.Text);
+                    byte[] Text = Encoding.UTF8.GetBytes(OutputRichTextBox.Text);
                     fs.Write(Text, 0, Text.Length);
                 }
             }
 
 
         }
+
+        private void EnterButton_Click(object sender, EventArgs e)
+        {
+            Language lang;
+            if (LanguageСomboBox.SelectedIndex == 1) 
+            {
+                lang = Language.russian;
+            }
+            else
+            {
+                lang = Language.english;
+            }
+
+
+            try
+            {
+                if (SelectСomboBox.SelectedIndex == 1)
+                {
+                    OutputRichTextBox.Text = CaesarСypher.Coder(InputRichTextBox.Text.ToCharArray(), ((int)KeyNumericUpDown.Value), lang);
+                }
+                else
+                {
+                    OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), ((int)KeyNumericUpDown.Value), lang);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            InputRichTextBox.Width = TextPanel.Width / 2 - 4;
+            OutputRichTextBox.Location = new Point(TextPanel.Width / 2 + 4, OutputRichTextBox.Location.Y);
+            OutputRichTextBox.Width = TextPanel.Width / 2 - 4;
+        }
+
+        
+        private enum coursor { input, output }
+        coursor _coursor = coursor.input;
+
+        private void InputRichTextBox_Enter(object sender, EventArgs e)
+        {
+            _coursor = coursor.input;
+            OutputPen.Visible = false;
+            InputPen.Visible = true;
+        }
+
+        private void OutputRichTextBox_Enter(object sender, EventArgs e)
+        {
+            _coursor = coursor.output;
+            InputPen.Visible = false;
+            OutputPen.Visible = true;
+        }
+
     }
 }

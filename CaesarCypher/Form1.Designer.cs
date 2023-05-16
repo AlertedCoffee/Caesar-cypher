@@ -32,7 +32,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +45,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.panel1.SuspendLayout();
@@ -59,7 +60,7 @@
             this.EditToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -67,11 +68,10 @@
             // 
             this.FileToolStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFileToolStrip,
-            this.SaveToolStripMenuItem,
             this.SaveAsToolStripMenuItem});
             this.FileToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FileToolStrip.Name = "FileToolStrip";
-            this.FileToolStrip.Size = new System.Drawing.Size(59, 24);
+            this.FileToolStrip.Size = new System.Drawing.Size(59, 26);
             this.FileToolStrip.Text = "Файл";
             // 
             // OpenFileToolStrip
@@ -80,13 +80,7 @@
             this.OpenFileToolStrip.Size = new System.Drawing.Size(192, 26);
             this.OpenFileToolStrip.Text = "Открыть";
             this.OpenFileToolStrip.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            // 
-            // SaveToolStripMenuItem
-            // 
-            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
-            this.SaveToolStripMenuItem.Text = "Сохранить";
-            this.SaveToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.OpenFileToolStrip.Click += new System.EventHandler(this.OpenFileToolStrip_Click);
             // 
             // SaveAsToolStripMenuItem
             // 
@@ -94,6 +88,7 @@
             this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.SaveAsToolStripMenuItem.Text = "Сохранить как";
             this.SaveAsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
@@ -101,25 +96,26 @@
             this.FontToolStripMenuItem,
             this.ColorToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
             this.EditToolStripMenuItem.Text = "Правка";
             // 
             // FontToolStripMenuItem
             // 
             this.FontToolStripMenuItem.Name = "FontToolStripMenuItem";
-            this.FontToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.FontToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.FontToolStripMenuItem.Text = "Шрифт";
             this.FontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
             // 
             // ColorToolStripMenuItem
             // 
             this.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem";
-            this.ColorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ColorToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.ColorToolStripMenuItem.Text = "Цвет";
             this.ColorToolStripMenuItem.Click += new System.EventHandler(this.ColorToolStripMenuItem_Click);
             // 
             // SelectСomboBox
             // 
+            this.SelectСomboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SelectСomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectСomboBox.FormattingEnabled = true;
             this.SelectСomboBox.Items.AddRange(new object[] {
@@ -155,6 +151,7 @@
             // 
             // EnterButton
             // 
+            this.EnterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.EnterButton.Enabled = false;
             this.EnterButton.Location = new System.Drawing.Point(633, 530);
             this.EnterButton.Name = "EnterButton";
@@ -190,12 +187,23 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.KeyNumericUpDown);
             this.panel1.Controls.Add(this.KeyLable);
             this.panel1.Location = new System.Drawing.Point(342, 535);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(134, 40);
             this.panel1.TabIndex = 8;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "text";
+            this.openFileDialog1.Filter = "text|*.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "text|*.txt";
             // 
             // Form1
             // 
@@ -210,7 +218,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Comic Sans MS", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(540, 260);
+            this.MinimumSize = new System.Drawing.Size(590, 260);
             this.Name = "Form1";
             this.Text = "Взлома шифра Цезаря";
             this.menuStrip1.ResumeLayout(false);
@@ -235,13 +243,14 @@
         private System.Windows.Forms.ComboBox LanguageСomboBox;
         private System.Windows.Forms.Label KeyLable;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem FontToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ColorToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

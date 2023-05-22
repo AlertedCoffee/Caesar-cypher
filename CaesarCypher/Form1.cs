@@ -178,16 +178,17 @@ namespace CaesarCypher
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = coursor.input;
-            OutputPen.Visible = false;
-            InputPen.Visible = true;
+            InputLabel.Text += "✎";
+            OutputLabel.Text = "Вывод";
+
         }
 
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = coursor.output;
-            InputPen.Visible = false;
-            OutputPen.Visible = true;
-        }
+            OutputLabel.Text += "✎";
+            InputLabel.Text = "Ввод";
 
+        }
     }
 }

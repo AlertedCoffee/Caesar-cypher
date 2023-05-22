@@ -20,7 +20,7 @@ namespace CaesarCypher
         {
             InitializeComponent();
             SelectСomboBox.SelectedIndex = 0;
-            LanguageСomboBox.SelectedIndex=0;
+            LanguageСomboBox.SelectedIndex = 0;
         }
 
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace CaesarCypher
 
             colorDialog1.Color = textBox.ForeColor;
 
-            if (colorDialog1.ShowDialog()== DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBox.ForeColor = colorDialog1.Color;
             }
@@ -91,11 +91,8 @@ namespace CaesarCypher
                     {
                         text = sr.ReadToEnd();
                     }
-                }
-                else
-                {
-                    _filePath = "";
-                    text = "";
+                    InputRichTextBox.Text = text;
+                    OutputRichTextBox.Text = "";
                 }
             }
             catch (Exception exc)
@@ -103,21 +100,32 @@ namespace CaesarCypher
                 MessageBox.Show("Ошибка чтения файла.\n" + exc.Message, "Взлома шифра Цезаря", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            InputRichTextBox.Text = text;
 
             InputRichTextBox.SelectionStart = InputRichTextBox.TextLength;
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 _filePath = saveFileDialog1.FileName;
-                
-                
+
+
                 using (FileStream fs = new FileStream(_filePath, FileMode.Create))
                 {
-                    byte[] Text = Encoding.UTF8.GetBytes(OutputRichTextBox.Text);
+                    byte[] Text = null;
+                    switch (_coursor)
+                    {
+                        case coursor.input:
+                            Text = Encoding.UTF8.GetBytes(InputRichTextBox.Text);
+                            break;
+                        case coursor.output:
+                            Text = Encoding.UTF8.GetBytes(OutputRichTextBox.Text);
+                            break;
+                        default:
+                            break;
+                    }
+
                     fs.Write(Text, 0, Text.Length);
                 }
             }
@@ -128,7 +136,7 @@ namespace CaesarCypher
         private void EnterButton_Click(object sender, EventArgs e)
         {
             Language lang;
-            if (LanguageСomboBox.SelectedIndex == 1) 
+            if (LanguageСomboBox.SelectedIndex == 1)
             {
                 lang = Language.russian;
             }
@@ -153,7 +161,7 @@ namespace CaesarCypher
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -163,7 +171,7 @@ namespace CaesarCypher
             OutputRichTextBox.Width = TextPanel.Width / 2 - 4;
         }
 
-        
+
         private enum coursor { input, output }
         coursor _coursor = coursor.input;
 

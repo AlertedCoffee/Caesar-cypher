@@ -46,14 +46,19 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TextPanel = new System.Windows.Forms.Panel();
-            this.OutputRichTextBox = new System.Windows.Forms.RichTextBox();
             this.InputRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.OutputRichTextBox = new System.Windows.Forms.RichTextBox();
             this.InputPen = new System.Windows.Forms.PictureBox();
             this.OutputPen = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.KeyPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.TextPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InputPen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OutputPen)).BeginInit();
@@ -199,62 +204,80 @@
             // 
             this.saveFileDialog1.Filter = "text|*.txt";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.InputPen);
+            this.splitContainer1.Panel1.Controls.Add(this.InputRichTextBox);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.OutputPen);
+            this.splitContainer1.Panel2.Controls.Add(this.OutputRichTextBox);
+            this.splitContainer1.Size = new System.Drawing.Size(789, 476);
+            this.splitContainer1.SplitterDistance = 394;
+            this.splitContainer1.TabIndex = 0;
+            // 
             // TextPanel
             // 
             this.TextPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextPanel.Controls.Add(this.OutputPen);
-            this.TextPanel.Controls.Add(this.InputPen);
-            this.TextPanel.Controls.Add(this.OutputRichTextBox);
-            this.TextPanel.Controls.Add(this.InputRichTextBox);
+            this.TextPanel.Controls.Add(this.splitContainer1);
             this.TextPanel.Location = new System.Drawing.Point(0, 35);
             this.TextPanel.Name = "TextPanel";
             this.TextPanel.Size = new System.Drawing.Size(789, 476);
             this.TextPanel.TabIndex = 9;
             // 
-            // OutputRichTextBox
-            // 
-            this.OutputRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.OutputRichTextBox.Location = new System.Drawing.Point(399, 3);
-            this.OutputRichTextBox.Name = "OutputRichTextBox";
-            this.OutputRichTextBox.Size = new System.Drawing.Size(386, 470);
-            this.OutputRichTextBox.TabIndex = 0;
-            this.OutputRichTextBox.Text = "";
-            this.OutputRichTextBox.Enter += new System.EventHandler(this.OutputRichTextBox_Enter);
-            // 
             // InputRichTextBox
             // 
-            this.InputRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.InputRichTextBox.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.InputRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.InputRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.InputRichTextBox.Name = "InputRichTextBox";
-            this.InputRichTextBox.Size = new System.Drawing.Size(390, 470);
+            this.InputRichTextBox.Size = new System.Drawing.Size(394, 476);
             this.InputRichTextBox.TabIndex = 0;
             this.InputRichTextBox.Text = "";
             this.InputRichTextBox.Enter += new System.EventHandler(this.InputRichTextBox_Enter);
             // 
+            // OutputRichTextBox
+            // 
+            this.OutputRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OutputRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.OutputRichTextBox.Name = "OutputRichTextBox";
+            this.OutputRichTextBox.Size = new System.Drawing.Size(391, 476);
+            this.OutputRichTextBox.TabIndex = 1;
+            this.OutputRichTextBox.Text = "";
+            this.OutputRichTextBox.Enter += new System.EventHandler(this.OutputRichTextBox_Enter);
+            // 
             // InputPen
             // 
+            this.InputPen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.InputPen.BackColor = System.Drawing.Color.Transparent;
             this.InputPen.BackgroundImage = global::CaesarCypher.Properties.Resources.icons8_карандаш_100;
             this.InputPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.InputPen.Location = new System.Drawing.Point(364, 3);
+            this.InputPen.Location = new System.Drawing.Point(363, 3);
             this.InputPen.Name = "InputPen";
-            this.InputPen.Size = new System.Drawing.Size(29, 28);
+            this.InputPen.Size = new System.Drawing.Size(28, 28);
             this.InputPen.TabIndex = 1;
             this.InputPen.TabStop = false;
             // 
             // OutputPen
             // 
+            this.OutputPen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputPen.BackColor = System.Drawing.Color.Transparent;
             this.OutputPen.BackgroundImage = global::CaesarCypher.Properties.Resources.icons8_карандаш_100;
             this.OutputPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.OutputPen.Location = new System.Drawing.Point(758, 3);
+            this.OutputPen.Location = new System.Drawing.Point(360, 3);
             this.OutputPen.Name = "OutputPen";
-            this.OutputPen.Size = new System.Drawing.Size(27, 28);
-            this.OutputPen.TabIndex = 1;
+            this.OutputPen.Size = new System.Drawing.Size(28, 28);
+            this.OutputPen.TabIndex = 2;
             this.OutputPen.TabStop = false;
             this.OutputPen.Visible = false;
             // 
@@ -280,6 +303,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).EndInit();
             this.KeyPanel.ResumeLayout(false);
             this.KeyPanel.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.TextPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.InputPen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OutputPen)).EndInit();
@@ -307,9 +334,10 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Panel TextPanel;
-        private System.Windows.Forms.RichTextBox OutputRichTextBox;
+        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.RichTextBox InputRichTextBox;
+        private System.Windows.Forms.RichTextBox OutputRichTextBox;
+        private System.Windows.Forms.Panel TextPanel;
         private System.Windows.Forms.PictureBox InputPen;
         private System.Windows.Forms.PictureBox OutputPen;
     }

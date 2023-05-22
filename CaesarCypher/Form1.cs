@@ -20,7 +20,7 @@ namespace CaesarCypher
         {
             InitializeComponent();
             SelectСomboBox.SelectedIndex = 0;
-            LanguageСomboBox.SelectedIndex=0;   
+            LanguageСomboBox.SelectedIndex=0;
         }
 
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -25,8 +25,17 @@ namespace CaesarCypher
 
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            KeyPanel.Visible = true;
+            StringKeyPanel.Visible = false;
+            OutputRichTextBox.Text = "";
+
             if (SelectСomboBox.SelectedIndex != 0 && LanguageСomboBox.SelectedIndex != 0) EnterButton.Enabled = true;
             else EnterButton.Enabled = false;
+            if (SelectСomboBox.SelectedIndex == 3)
+            {
+                KeyPanel.Visible = false;
+                StringKeyPanel.Visible = true;
+            }
         }
 
 
@@ -135,6 +144,8 @@ namespace CaesarCypher
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
+            OutputRichTextBox.Text = "";
+
             Language lang;
             if (LanguageСomboBox.SelectedIndex == 1)
             {
@@ -144,17 +155,23 @@ namespace CaesarCypher
             {
                 lang = Language.english;
             }
-
-
+            
             try
             {
                 if (SelectСomboBox.SelectedIndex == 1)
                 {
                     OutputRichTextBox.Text = CaesarСypher.Coder(InputRichTextBox.Text.ToCharArray(), ((int)KeyNumericUpDown.Value), lang);
                 }
-                else
+                else if (SelectСomboBox.SelectedIndex == 2)
                 {
                     OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), ((int)KeyNumericUpDown.Value), lang);
+                }
+                else if (SelectСomboBox.SelectedIndex == 3)
+                {
+                    KeyLabel.Text = Hack(InputRichTextBox.Text, lang);
+                    int key = 0;
+                    
+                    if(Int32.TryParse(KeyLabel.Text, out key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
                 }
             }
             catch (Exception ex)
@@ -164,13 +181,29 @@ namespace CaesarCypher
 
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
+        private string Hack(string text, Language lang)
         {
-            InputRichTextBox.Width = TextPanel.Width / 2 - 4;
-            OutputRichTextBox.Location = new Point(TextPanel.Width / 2 + 4, OutputRichTextBox.Location.Y);
-            OutputRichTextBox.Width = TextPanel.Width / 2 - 4;
-        }
+            string key = "Неопределен.";
 
+            try
+            {
+                key = CaesarСypher.HackCypher(InputRichTextBox.Text, lang).ToString();
+                return key;
+            }
+            catch (CaesarСypher.NotEnoughSymbolsException ex)
+            {
+                DialogResult dialog;
+
+                dialog = MessageBox.Show(ex.Message + "\nВы желаете продолжить?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialog == DialogResult.Yes)
+                {
+                    key = CaesarСypher.HackCypher(InputRichTextBox.Text, lang, true).ToString();
+                    return key;
+                }
+                else return key;
+            }
+        }
 
         private enum coursor { input, output }
         coursor _coursor = coursor.input;
@@ -178,7 +211,7 @@ namespace CaesarCypher
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = coursor.input;
-            InputLabel.Text += "✎";
+            InputLabel.Text = "Ввод✎";
             OutputLabel.Text = "Вывод";
 
         }
@@ -186,7 +219,7 @@ namespace CaesarCypher
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = coursor.output;
-            OutputLabel.Text += "✎";
+            OutputLabel.Text = "Вывод✎";
             InputLabel.Text = "Ввод";
 
         }

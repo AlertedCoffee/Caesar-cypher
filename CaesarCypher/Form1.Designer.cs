@@ -53,6 +53,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.InputLabel = new System.Windows.Forms.Label();
             this.OutputLabel = new System.Windows.Forms.Label();
+            this.StringKeyPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.KeyLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.KeyPanel.SuspendLayout();
@@ -65,6 +68,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.StringKeyPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -75,7 +79,7 @@
             this.EditToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(789, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(789, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +90,7 @@
             this.SaveAsToolStripMenuItem});
             this.FileToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FileToolStrip.Name = "FileToolStrip";
-            this.FileToolStrip.Size = new System.Drawing.Size(59, 24);
+            this.FileToolStrip.Size = new System.Drawing.Size(59, 26);
             this.FileToolStrip.Text = "Файл";
             // 
             // OpenFileToolStrip
@@ -111,7 +115,7 @@
             this.FontToolStripMenuItem,
             this.ColorToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
             this.EditToolStripMenuItem.Text = "Правка";
             // 
             // FontToolStripMenuItem
@@ -136,7 +140,8 @@
             this.SelectСomboBox.Items.AddRange(new object[] {
             "Выбор режима работы",
             "Зашифровка",
-            "Дешифровка"});
+            "Дешифровка",
+            "Взлом"});
             this.SelectСomboBox.Location = new System.Drawing.Point(150, 3);
             this.SelectСomboBox.Name = "SelectСomboBox";
             this.SelectСomboBox.Size = new System.Drawing.Size(191, 26);
@@ -299,11 +304,42 @@
             this.OutputLabel.Text = "Вывод";
             this.OutputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // StringKeyPanel
+            // 
+            this.StringKeyPanel.Controls.Add(this.KeyLabel);
+            this.StringKeyPanel.Controls.Add(this.label1);
+            this.StringKeyPanel.Location = new System.Drawing.Point(298, 530);
+            this.StringKeyPanel.Name = "StringKeyPanel";
+            this.StringKeyPanel.Size = new System.Drawing.Size(203, 54);
+            this.StringKeyPanel.TabIndex = 11;
+            this.StringKeyPanel.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Ключ:";
+            // 
+            // KeyLabel
+            // 
+            this.KeyLabel.AutoSize = true;
+            this.KeyLabel.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.KeyLabel.Location = new System.Drawing.Point(70, 13);
+            this.KeyLabel.Name = "KeyLabel";
+            this.KeyLabel.Size = new System.Drawing.Size(128, 24);
+            this.KeyLabel.TabIndex = 1;
+            this.KeyLabel.Text = "Неопределен.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 587);
+            this.Controls.Add(this.StringKeyPanel);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.TextPanel);
             this.Controls.Add(this.KeyPanel);
@@ -316,7 +352,6 @@
             this.MinimumSize = new System.Drawing.Size(590, 260);
             this.Name = "Form1";
             this.Text = "Взлома шифра Цезаря";
-            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).EndInit();
@@ -331,6 +366,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.StringKeyPanel.ResumeLayout(false);
+            this.StringKeyPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,6 +399,9 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label InputLabel;
         private System.Windows.Forms.Label OutputLabel;
+        private System.Windows.Forms.Panel StringKeyPanel;
+        private System.Windows.Forms.Label KeyLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
 

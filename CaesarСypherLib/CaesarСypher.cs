@@ -241,7 +241,7 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод взлома шифра Цезаря.
         /// </summary>
-        /// <param name="text">Входной текст типа char[]</param>
+        /// <param name="text">Входной текст типа string</param>
         /// <param name="language">Язык исходного текста Language</param>
         /// <param name="ignoreNotEnoughSymbolsException">Флаг для игнорирования исключения при недостаточном кол-ве символов для взлома шифра</param>
         /// <returns>ключ шифра int</returns>

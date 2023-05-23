@@ -28,6 +28,7 @@ namespace CaesarCypher
             KeyPanel.Visible = true;
             StringKeyPanel.Visible = false;
             OutputRichTextBox.Text = "";
+            KeyLabel.Text = "Неопределен.";
 
             if (SelectСomboBox.SelectedIndex != 0 && LanguageСomboBox.SelectedIndex != 0) EnterButton.Enabled = true;
             else EnterButton.Enabled = false;
@@ -45,10 +46,10 @@ namespace CaesarCypher
 
             switch (_coursor)
             {
-                case coursor.input:
+                case Coursor.input:
                     textBox = InputRichTextBox;
                     break;
-                case coursor.output:
+                case Coursor.output:
                     textBox = OutputRichTextBox;
                     break;
             }
@@ -67,10 +68,10 @@ namespace CaesarCypher
 
             switch (_coursor)
             {
-                case coursor.input:
+                case Coursor.input:
                     textBox = InputRichTextBox;
                     break;
-                case coursor.output:
+                case Coursor.output:
                     textBox = OutputRichTextBox;
                     break;
             }
@@ -125,10 +126,10 @@ namespace CaesarCypher
                     byte[] Text = null;
                     switch (_coursor)
                     {
-                        case coursor.input:
+                        case Coursor.input:
                             Text = Encoding.UTF8.GetBytes(InputRichTextBox.Text);
                             break;
-                        case coursor.output:
+                        case Coursor.output:
                             Text = Encoding.UTF8.GetBytes(OutputRichTextBox.Text);
                             break;
                         default:
@@ -173,12 +174,6 @@ namespace CaesarCypher
                     
                     if(Int32.TryParse(KeyLabel.Text, out key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
                 }
-                else if (SelectСomboBox.SelectedIndex == 4)
-                {
-                    int key = CaesarСypher.FindKey(InputRichTextBox.Text);
-                    KeyLabel.Text = key.ToString();
-                    OutputRichTextBox.Text =  CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, Language.english);
-                }
             }
             catch (Exception ex)
             {
@@ -211,12 +206,12 @@ namespace CaesarCypher
             }
         }
 
-        private enum coursor { input, output }
-        coursor _coursor = coursor.input;
+        private enum Coursor { input, output }
+        Coursor _coursor = Coursor.input;
 
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
-            _coursor = coursor.input;
+            _coursor = Coursor.input;
             InputLabel.Text = "Ввод✎";
             OutputLabel.Text = "Вывод";
 
@@ -224,7 +219,7 @@ namespace CaesarCypher
 
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
-            _coursor = coursor.output;
+            _coursor = Coursor.output;
             OutputLabel.Text = "Вывод✎";
             InputLabel.Text = "Ввод";
 

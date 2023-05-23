@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Versioning;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarСypherLib
 {
     /// <summary>
     /// Перечисление для выбора языка.
     /// </summary>
-    public enum Language { russian, english }
+    public enum Language { 
+        /// <summary>
+        /// Русский язык.
+        /// </summary>
+        russian,
+        /// <summary>
+        /// Английский язык.
+        /// </summary>
+        english
+    }
 
     /// <summary>
     /// Статический класс для шифровки, дешифровки и взлома шифра Цезаря.
@@ -45,7 +51,7 @@ namespace CaesarСypherLib
         /// <param name="text">Входной текст типа char[]</param>
         /// <param name="key">Ключ шифра типа int</param>
         /// <param name="language">Язык исходного текста Language</param>
-        /// <returns>string зашифрованный текст</returns>
+        /// <returns>Строка зашифрованного текст</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом входном тексте</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
         public static string Coder(char[] text, int key, Language language)
@@ -55,7 +61,6 @@ namespace CaesarСypherLib
 
             char[] dictionary = null;
             char[] dictionaryUpper = null;
-            string newString = "";
 
             switch (language)
             {
@@ -69,9 +74,12 @@ namespace CaesarСypherLib
                     break;
             }
 
+            // Нормализация параметра key.
             if (key < 0) key = key % dictionary.Length + dictionary.Length;
             else key %= dictionary.Length;
 
+            
+            string newString = "";
 
             foreach (char c in text)
             {
@@ -87,8 +95,8 @@ namespace CaesarСypherLib
 
                     if (position == -1) throw new InvalidLanguageException(c);
 
-
-                    newString += upper ? dictionaryUpper[(position + key) % dictionary.Length] : dictionary[(position + key) % dictionary.Length];
+                    var newPosition = (position + key) % dictionary.Length;
+                    newString += upper ? dictionaryUpper[newPosition] : dictionary[newPosition];
                 }
                 else
                 {
@@ -99,23 +107,25 @@ namespace CaesarСypherLib
             return newString;
         }
 
+
         /// <summary>
         /// Метод дешифровки текста шифром Цезаря.
         /// </summary>
         /// <param name="text">Входной текст типа char[]</param>
         /// <param name="key">Ключ шифра типа int</param>
         /// <param name="language">Язык исходного текста Language</param>
-        /// <returns>string дешифрованный текст</returns>
+        /// <returns>Строка дешифрованного текст</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом входном тексте</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
         public static string Decoder(char[] text, int key, Language language) => Coder(text, key * -1, language);
 
+
         /// <summary>
-        /// Метод поиска символа в алфавите.
+        /// Метод поиска символа в словаре.
         /// </summary>
         /// <param name="dictionary">Алфавит типа char[]</param>
         /// <param name="c">искомый параметр типа char</param>
-        /// <returns>index найденного элемента, -1 при отсутствии</returns>
+        /// <returns>Индекс найденного элемента, -1 при отсутствии</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом словаре</exception>
         private static int FindIndex(char[] dictionary, char c)
         {
@@ -135,7 +145,7 @@ namespace CaesarСypherLib
         /// </summary>
         /// <param name="text">Входной текст для анализа типа string</param>
         /// <param name="language">Выбор алфавита Language</param>
-        /// <returns>Dictionary<char, double>, где ключ - буква алфавита, value - частоты использования в тексте в %.</returns>
+        /// <returns>Словарь частотности, где ключ - буква алфавита, value - частоты использования в тексте в процентах</returns>
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
         /// <exception cref="ArgumentException">Исключение при пустой строке text</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
@@ -146,7 +156,6 @@ namespace CaesarСypherLib
 
 
             text = text.ToLower();
-
             char[] dictionary = null;
 
             switch (language)
@@ -160,7 +169,6 @@ namespace CaesarСypherLib
             }
 
             Dictionary<char, double> count = new Dictionary<char, double>();
-
             Dictionary<char, double> frequency = new Dictionary<char, double>();
 
 
@@ -198,56 +206,12 @@ namespace CaesarСypherLib
 
 
         /// <summary>
-        /// Метод нахождения максимального значения в массиве.
-        /// </summary>
-        /// <param name="values">Массив double[]</param>
-        /// <returns>максимальное значение double</returns>
-        /// <exception cref="ArgumentNullException">Исключение при пустом массиве values</exception>
-        private static double MaxOf(double[] values) 
-        {
-            if(values == null || values.Length == 0) throw new ArgumentNullException(nameof(values));
-
-
-            double max = values[0];
-
-            foreach(var elem  in values)
-            {
-                max = Math.Max(max, elem);
-            }
-
-            return max;
-        }
-
-
-        /// <summary>
-        /// Метод нахождения минимального значения в массиве.
-        /// </summary>
-        /// <param name="values">Массив double[]</param>
-        /// <returns>минимальное значение double</returns>
-        /// <exception cref="ArgumentNullException">Исключение при пустом массиве values</exception>
-        private static double MinOf(double[] values)
-        {
-            if (values == null || values.Length == 0) throw new ArgumentNullException(nameof(values));
-
-
-            double min = values[0];
-
-            foreach (var elem in values)
-            {
-                min = Math.Min(min, elem);
-            }
-
-            return min;
-        }
-
-
-        /// <summary>
         /// Метод взлома шифра Цезаря.
         /// </summary>
         /// <param name="text">Входной текст типа string</param>
         /// <param name="language">Язык исходного текста Language</param>
         /// <param name="ignoreNotEnoughSymbolsException">Флаг для игнорирования исключения при недостаточном кол-ве символов для взлома шифра</param>
-        /// <returns>ключ шифра int</returns>
+        /// <returns>Ключ шифра</returns>
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
         /// <exception cref="ArgumentException">Исключение при пустой строке text</exception>
         /// <exception cref="NotEnoughSymbolsException">Исключение при недостаточном кол-ве символов для взлома шифра</exception>
@@ -258,55 +222,45 @@ namespace CaesarСypherLib
 
 
             char[] dictionary = null;
-            double[] standard = null;
+            int standartMostFrequentIndex = 0;
 
             switch (language)
             {
                 case Language.russian:
                     dictionary = _russianDictiondry.ToCharArray();
-                    standard = new double[] { 8.01, 1.59, 4.54, 1.7, 2.98, 8.45, 0.04, 0.94, 1.65, 7.35, 1.21, 3.49, 4.4, 3.21, 6.7, 10.97, 2.81, 4.73, 5.47,
-                                6.26, 2.62, 0.26, 0.97, 0.48, 1.44, 0.73, 0.36, 0.04, 1.9, 1.74, 0.32, 0.64, 2.01};
+                    standartMostFrequentIndex = 15;
                     break;
                 case Language.english:
                     dictionary = _englishDictiondry.ToCharArray();
-                    standard = new double[] { 8.17, 1.49, 2.78, 4.25, 12.7, 2.23, 2.02, 6.09, 6.97, 0.15, 0.77, 4.03, 2.41, 6.75, 7.51, 1.93, 0.1, 5.99, 6.33,
-                                9.06, 2.76, 0.98, 2.36, 0.15, 1.97, 0.07 };
+                    standartMostFrequentIndex = 4;
                     break;
             }
 
             var frequency = FrequencyAnalysis(text, language);
 
-            if (!IsItOkay(frequency.Values.ToArray()) && !ignoreNotEnoughSymbolsException) throw new NotEnoughSymbolsException();
+            if (!IsItOkay(frequency.Values.ToArray(), language) && !ignoreNotEnoughSymbolsException) throw new NotEnoughSymbolsException();
 
+            var mostFrequentLetter = frequency.OrderByDescending(x => x.Value).First().Key;
+            int indexOfMostFrequent = Array.IndexOf(dictionary, mostFrequentLetter);
 
-            var maxDeviations = new List<double>();
+            var key = indexOfMostFrequent - standartMostFrequentIndex;
 
-            for (int i = 0; i <= dictionary.Length; i++)
+            if (key < 0)
             {
-                var deviations = new List<double>();
-
-                text = Decoder(text.ToCharArray(), 1, language);
-                frequency = FrequencyAnalysis(text, language);
-
-                foreach (var c in frequency.Keys)
-                {
-                    deviations.Add(standard[Array.IndexOf(dictionary, c)] - frequency[c]);
-                }
-
-                maxDeviations.Add(MaxOf(deviations.ToArray()));
-
+                key += dictionary.Length;
             }
 
-            return Array.IndexOf(maxDeviations.ToArray(), MinOf(maxDeviations.ToArray())) + 1;
+            return key;
         }
 
         /// <summary>
         /// Метод проверки полноты использования символов алфавита.
         /// </summary>
         /// <param name="values">массив значений double[]</param>
-        /// <returns>bool. true - при достаточно полном использовании алфавита, иначе false</returns>
+        /// <param name="language">язык алфавита Language</param>
+        /// <returns>true - при достаточно полном использовании алфавита, иначе false</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом массиве</exception>
-        private static bool IsItOkay(double[] values)
+        private static bool IsItOkay(double[] values, Language language)
         {
             if(values == null || values.Length == 0) throw new ArgumentNullException("values");
 
@@ -320,42 +274,6 @@ namespace CaesarСypherLib
             Console.WriteLine(Math.Round((double)counter / values.Length, 1));
 
             return (Math.Round((double)counter / values.Length, 1) >= 0.5);
-        }
-
-
-        public static int FindKey(string ciphertext)
-        {
-            // исходим из предположения, что ключ содержит только буквы алфавита
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-            // создаем словарь, чтобы хранить частотность каждой буквы в тексте
-            Dictionary<char, int> frequencies = new Dictionary<char, int>();
-            foreach (var c in alphabet)
-            {
-                frequencies.Add(c, 0);
-            }
-
-            // считаем частотность каждой буквы в тексте
-            foreach (var c in ciphertext)
-            {
-                if (frequencies.ContainsKey(c))
-                {
-                    frequencies[c]++;
-                }
-            }
-
-            // находим наиболее часто встречающуюся букву в тексте
-            char mostFrequentLetter = frequencies.OrderByDescending(x => x.Value).First().Key;
-
-            // находим сдвиг между наиболее частой буквой в тексте и буквой 'e'
-            int shift = mostFrequentLetter - 'e';
-            var хуй = 'e';
-            if (shift < 0)
-            {
-                shift += 26;
-            }
-
-            return shift;
         }
 
 

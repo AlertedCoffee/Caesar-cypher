@@ -40,7 +40,7 @@
             this.KeyNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.EnterButton = new System.Windows.Forms.Button();
             this.LanguageСomboBox = new System.Windows.Forms.ComboBox();
-            this.KeyLable = new System.Windows.Forms.Label();
+            this.Label2 = new System.Windows.Forms.Label();
             this.KeyPanel = new System.Windows.Forms.Panel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -55,7 +55,7 @@
             this.OutputLabel = new System.Windows.Forms.Label();
             this.StringKeyPanel = new System.Windows.Forms.Panel();
             this.KeyLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.KeyPanel.SuspendLayout();
@@ -79,7 +79,7 @@
             this.EditToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(789, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(789, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,7 +90,7 @@
             this.SaveAsToolStripMenuItem});
             this.FileToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FileToolStrip.Name = "FileToolStrip";
-            this.FileToolStrip.Size = new System.Drawing.Size(59, 24);
+            this.FileToolStrip.Size = new System.Drawing.Size(59, 26);
             this.FileToolStrip.Text = "Файл";
             // 
             // OpenFileToolStrip
@@ -115,7 +115,7 @@
             this.FontToolStripMenuItem,
             this.ColorToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
             this.EditToolStripMenuItem.Text = "Правка";
             // 
             // FontToolStripMenuItem
@@ -141,8 +141,7 @@
             "Выбор режима работы",
             "Зашифровка",
             "Дешифровка",
-            "Взлом",
-            "GPT"});
+            "Взлом"});
             this.SelectСomboBox.Location = new System.Drawing.Point(150, 3);
             this.SelectСomboBox.Name = "SelectСomboBox";
             this.SelectСomboBox.Size = new System.Drawing.Size(191, 26);
@@ -183,22 +182,22 @@
             this.LanguageСomboBox.TabIndex = 6;
             this.LanguageСomboBox.SelectedIndexChanged += new System.EventHandler(this.СomboBox_SelectedIndexChanged);
             // 
-            // KeyLable
+            // Label2
             // 
-            this.KeyLable.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.KeyLable.AutoSize = true;
-            this.KeyLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.KeyLable.Location = new System.Drawing.Point(3, 6);
-            this.KeyLable.Name = "KeyLable";
-            this.KeyLable.Size = new System.Drawing.Size(52, 22);
-            this.KeyLable.TabIndex = 7;
-            this.KeyLable.Text = "ключ";
+            this.Label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Label2.AutoSize = true;
+            this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Label2.Location = new System.Drawing.Point(3, 6);
+            this.Label2.Name = "Label2";
+            this.Label2.Size = new System.Drawing.Size(52, 22);
+            this.Label2.TabIndex = 7;
+            this.Label2.Text = "ключ";
             // 
             // KeyPanel
             // 
             this.KeyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.KeyPanel.Controls.Add(this.KeyNumericUpDown);
-            this.KeyPanel.Controls.Add(this.KeyLable);
+            this.KeyPanel.Controls.Add(this.Label2);
             this.KeyPanel.Location = new System.Drawing.Point(331, 535);
             this.KeyPanel.Name = "KeyPanel";
             this.KeyPanel.Size = new System.Drawing.Size(134, 40);
@@ -282,6 +281,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.OutputLabel);
             this.splitContainer2.Size = new System.Drawing.Size(789, 27);
             this.splitContainer2.SplitterDistance = 394;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.TabIndex = 10;
             // 
             // InputLabel
@@ -309,7 +309,7 @@
             // StringKeyPanel
             // 
             this.StringKeyPanel.Controls.Add(this.KeyLabel);
-            this.StringKeyPanel.Controls.Add(this.label1);
+            this.StringKeyPanel.Controls.Add(this.Label1);
             this.StringKeyPanel.Location = new System.Drawing.Point(298, 530);
             this.StringKeyPanel.Name = "StringKeyPanel";
             this.StringKeyPanel.Size = new System.Drawing.Size(203, 54);
@@ -326,15 +326,15 @@
             this.KeyLabel.TabIndex = 1;
             this.KeyLabel.Text = "Неопределен.";
             // 
-            // label1
+            // Label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ключ:";
+            this.Label1.AutoSize = true;
+            this.Label1.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Label1.Location = new System.Drawing.Point(3, 13);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(61, 24);
+            this.Label1.TabIndex = 0;
+            this.Label1.Text = "Ключ:";
             // 
             // Form1
             // 
@@ -384,7 +384,7 @@
         private System.Windows.Forms.NumericUpDown KeyNumericUpDown;
         private System.Windows.Forms.Button EnterButton;
         private System.Windows.Forms.ComboBox LanguageСomboBox;
-        private System.Windows.Forms.Label KeyLable;
+        private System.Windows.Forms.Label Label2;
         private System.Windows.Forms.Panel KeyPanel;
         private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
@@ -403,7 +403,7 @@
         private System.Windows.Forms.Label OutputLabel;
         private System.Windows.Forms.Panel StringKeyPanel;
         private System.Windows.Forms.Label KeyLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Label1;
     }
 }
 

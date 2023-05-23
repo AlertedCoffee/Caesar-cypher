@@ -170,13 +170,16 @@ namespace CaesarСypherLib
                 frequency.Add(c, 0);
             }
 
-            foreach(var c in text.ToCharArray())
+            int trueLenght = 0;
+
+            foreach (var c in text.ToCharArray())
             {
                 if (char.IsLetter(c))
                 {
                     try
                     {
                         count[c] += 1;
+                        trueLenght += 1;
                     }
                     catch (System.Collections.Generic.KeyNotFoundException) 
                     {
@@ -187,7 +190,7 @@ namespace CaesarСypherLib
 
             foreach(var c in count.Keys)
             {
-                frequency[c] = count[c] / text.Length * 100;
+                frequency[c] = count[c] / trueLenght * 100;
             }
 
             return frequency;
@@ -291,7 +294,6 @@ namespace CaesarСypherLib
                 }
 
                 maxDeviations.Add(MaxOf(deviations.ToArray()));
-                //if (maxDeviations[maxDeviations.Count - 1] > 12.5 && !ignoreNotEnoughSymbolsException) throw new NotEnoughSymbolsException();
 
             }
 
@@ -319,6 +321,43 @@ namespace CaesarСypherLib
 
             return (Math.Round((double)counter / values.Length, 1) >= 0.5);
         }
+
+
+        public static int FindKey(string ciphertext)
+        {
+            // исходим из предположения, что ключ содержит только буквы алфавита
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+            // создаем словарь, чтобы хранить частотность каждой буквы в тексте
+            Dictionary<char, int> frequencies = new Dictionary<char, int>();
+            foreach (var c in alphabet)
+            {
+                frequencies.Add(c, 0);
+            }
+
+            // считаем частотность каждой буквы в тексте
+            foreach (var c in ciphertext)
+            {
+                if (frequencies.ContainsKey(c))
+                {
+                    frequencies[c]++;
+                }
+            }
+
+            // находим наиболее часто встречающуюся букву в тексте
+            char mostFrequentLetter = frequencies.OrderByDescending(x => x.Value).First().Key;
+
+            // находим сдвиг между наиболее частой буквой в тексте и буквой 'e'
+            int shift = mostFrequentLetter - 'e';
+            var хуй = 'e';
+            if (shift < 0)
+            {
+                shift += 26;
+            }
+
+            return shift;
+        }
+
 
         /// <summary>
         /// Исключение, которое выдается, когда в тексте недостаточно символов для точного взлома шифра.

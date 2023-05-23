@@ -54,8 +54,8 @@
             this.InputLabel = new System.Windows.Forms.Label();
             this.OutputLabel = new System.Windows.Forms.Label();
             this.StringKeyPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.KeyLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.KeyPanel.SuspendLayout();
@@ -79,7 +79,7 @@
             this.EditToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(789, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(789, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,7 +90,7 @@
             this.SaveAsToolStripMenuItem});
             this.FileToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FileToolStrip.Name = "FileToolStrip";
-            this.FileToolStrip.Size = new System.Drawing.Size(59, 26);
+            this.FileToolStrip.Size = new System.Drawing.Size(59, 24);
             this.FileToolStrip.Text = "Файл";
             // 
             // OpenFileToolStrip
@@ -115,7 +115,7 @@
             this.FontToolStripMenuItem,
             this.ColorToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.EditToolStripMenuItem.Text = "Правка";
             // 
             // FontToolStripMenuItem
@@ -141,7 +141,8 @@
             "Выбор режима работы",
             "Зашифровка",
             "Дешифровка",
-            "Взлом"});
+            "Взлом",
+            "GPT"});
             this.SelectСomboBox.Location = new System.Drawing.Point(150, 3);
             this.SelectСomboBox.Name = "SelectСomboBox";
             this.SelectСomboBox.Size = new System.Drawing.Size(191, 26);
@@ -243,6 +244,7 @@
             // 
             // OutputRichTextBox
             // 
+            this.OutputRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.OutputRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OutputRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.OutputRichTextBox.Name = "OutputRichTextBox";
@@ -314,16 +316,6 @@
             this.StringKeyPanel.TabIndex = 11;
             this.StringKeyPanel.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ключ:";
-            // 
             // KeyLabel
             // 
             this.KeyLabel.AutoSize = true;
@@ -333,6 +325,16 @@
             this.KeyLabel.Size = new System.Drawing.Size(128, 24);
             this.KeyLabel.TabIndex = 1;
             this.KeyLabel.Text = "Неопределен.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Ключ:";
             // 
             // Form1
             // 

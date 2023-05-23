@@ -173,6 +173,12 @@ namespace CaesarCypher
                     
                     if(Int32.TryParse(KeyLabel.Text, out key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
                 }
+                else if (SelectСomboBox.SelectedIndex == 4)
+                {
+                    int key = CaesarСypher.FindKey(InputRichTextBox.Text);
+                    KeyLabel.Text = key.ToString();
+                    OutputRichTextBox.Text =  CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, Language.english);
+                }
             }
             catch (Exception ex)
             {

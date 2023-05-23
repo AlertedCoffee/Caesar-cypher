@@ -281,6 +281,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.OutputLabel);
             this.splitContainer2.Size = new System.Drawing.Size(789, 27);
             this.splitContainer2.SplitterDistance = 394;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.TabIndex = 10;
             // 
             // InputLabel

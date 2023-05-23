@@ -40,7 +40,7 @@
             this.KeyNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.EnterButton = new System.Windows.Forms.Button();
             this.LanguageСomboBox = new System.Windows.Forms.ComboBox();
-            this.KeyLable = new System.Windows.Forms.Label();
+            this.Label2 = new System.Windows.Forms.Label();
             this.KeyPanel = new System.Windows.Forms.Panel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -177,22 +177,22 @@
             this.LanguageСomboBox.TabIndex = 6;
             this.LanguageСomboBox.SelectedIndexChanged += new System.EventHandler(this.СomboBox_SelectedIndexChanged);
             // 
-            // KeyLable
+            // Label2
             // 
-            this.KeyLable.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.KeyLable.AutoSize = true;
-            this.KeyLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.KeyLable.Location = new System.Drawing.Point(3, 6);
-            this.KeyLable.Name = "KeyLable";
-            this.KeyLable.Size = new System.Drawing.Size(52, 22);
-            this.KeyLable.TabIndex = 7;
-            this.KeyLable.Text = "ключ";
+            this.Label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Label2.AutoSize = true;
+            this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Label2.Location = new System.Drawing.Point(3, 6);
+            this.Label2.Name = "Label2";
+            this.Label2.Size = new System.Drawing.Size(52, 22);
+            this.Label2.TabIndex = 7;
+            this.Label2.Text = "ключ";
             // 
             // KeyPanel
             // 
             this.KeyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.KeyPanel.Controls.Add(this.KeyNumericUpDown);
-            this.KeyPanel.Controls.Add(this.KeyLable);
+            this.KeyPanel.Controls.Add(this.Label2);
             this.KeyPanel.Location = new System.Drawing.Point(331, 535);
             this.KeyPanel.Name = "KeyPanel";
             this.KeyPanel.Size = new System.Drawing.Size(134, 40);
@@ -238,6 +238,7 @@
             // 
             // OutputRichTextBox
             // 
+            this.OutputRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.OutputRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OutputRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.OutputRichTextBox.Name = "OutputRichTextBox";
@@ -316,7 +317,6 @@
             this.MinimumSize = new System.Drawing.Size(590, 260);
             this.Name = "Form1";
             this.Text = "Взлома шифра Цезаря";
-            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).EndInit();
@@ -345,7 +345,7 @@
         private System.Windows.Forms.NumericUpDown KeyNumericUpDown;
         private System.Windows.Forms.Button EnterButton;
         private System.Windows.Forms.ComboBox LanguageСomboBox;
-        private System.Windows.Forms.Label KeyLable;
+        private System.Windows.Forms.Label Label2;
         private System.Windows.Forms.Panel KeyPanel;
         private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;

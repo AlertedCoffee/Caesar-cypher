@@ -25,8 +25,15 @@ namespace CaesarCypher
 
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            KeyPanel.Visible = true;
+            OutputRichTextBox.Text = "";
+
             if (SelectСomboBox.SelectedIndex != 0 && LanguageСomboBox.SelectedIndex != 0) EnterButton.Enabled = true;
             else EnterButton.Enabled = false;
+            if (SelectСomboBox.SelectedIndex == 3)
+            {
+                KeyPanel.Visible = false;
+            }
         }
 
 
@@ -36,10 +43,10 @@ namespace CaesarCypher
 
             switch (_coursor)
             {
-                case coursor.input:
+                case Coursor.input:
                     textBox = InputRichTextBox;
                     break;
-                case coursor.output:
+                case Coursor.output:
                     textBox = OutputRichTextBox;
                     break;
             }
@@ -58,10 +65,10 @@ namespace CaesarCypher
 
             switch (_coursor)
             {
-                case coursor.input:
+                case Coursor.input:
                     textBox = InputRichTextBox;
                     break;
-                case coursor.output:
+                case Coursor.output:
                     textBox = OutputRichTextBox;
                     break;
             }
@@ -116,10 +123,10 @@ namespace CaesarCypher
                     byte[] Text = null;
                     switch (_coursor)
                     {
-                        case coursor.input:
+                        case Coursor.input:
                             Text = Encoding.UTF8.GetBytes(InputRichTextBox.Text);
                             break;
-                        case coursor.output:
+                        case Coursor.output:
                             Text = Encoding.UTF8.GetBytes(OutputRichTextBox.Text);
                             break;
                         default:
@@ -129,9 +136,8 @@ namespace CaesarCypher
                     fs.Write(Text, 0, Text.Length);
                 }
             }
-
-
         }
+
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
@@ -164,31 +170,22 @@ namespace CaesarCypher
 
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-            InputRichTextBox.Width = TextPanel.Width / 2 - 4;
-            OutputRichTextBox.Location = new Point(TextPanel.Width / 2 + 4, OutputRichTextBox.Location.Y);
-            OutputRichTextBox.Width = TextPanel.Width / 2 - 4;
-        }
-
-
-        private enum coursor { input, output }
-        coursor _coursor = coursor.input;
+        private enum Coursor { input, output }
+        Coursor _coursor = Coursor.input;
 
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
-            _coursor = coursor.input;
-            InputLabel.Text += "✎";
+            _coursor = Coursor.input;
+            InputLabel.Text = "Ввод✎";
             OutputLabel.Text = "Вывод";
 
         }
 
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
-            _coursor = coursor.output;
-            OutputLabel.Text += "✎";
+            _coursor = Coursor.output;
+            OutputLabel.Text = "Вывод✎";
             InputLabel.Text = "Ввод";
-
         }
     }
 }

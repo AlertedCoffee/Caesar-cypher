@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Net.Mime.MediaTypeNames;
 using CaesarСypherLib;
 
 namespace CaesarCypher
@@ -23,6 +15,7 @@ namespace CaesarCypher
             LanguageСomboBox.SelectedIndex = 0;
         }
 
+        // Обработчик события на изменение выбора у SelectСomboBox и LanguageСomboBox, управляющее видимостью элементов
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             KeyPanel.Visible = true;
@@ -36,7 +29,7 @@ namespace CaesarCypher
             }
         }
 
-
+        // Обработчик события на нажатие кнопки "Шрифт".
         private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBox textBox = InputRichTextBox;
@@ -59,6 +52,7 @@ namespace CaesarCypher
             }
         }
 
+        // Обработчик события на нажатие кнопки "Цвет".
         private void ColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBox textBox = InputRichTextBox;
@@ -83,6 +77,7 @@ namespace CaesarCypher
 
         private string _filePath;
 
+        // Обработчик события на нажатие кнопки "Открыть".
         private void OpenFileToolStrip_Click(object sender, EventArgs e)
         {
             string text = "";
@@ -90,7 +85,6 @@ namespace CaesarCypher
 
             try
             {
-                openFileDialog1.FileName = _filePath;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     _filePath = openFileDialog1.FileName;
@@ -111,6 +105,7 @@ namespace CaesarCypher
             InputRichTextBox.SelectionStart = InputRichTextBox.TextLength;
         }
 
+        // Обработчик события на нажатие кнопки "Сохранить как".
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -138,7 +133,7 @@ namespace CaesarCypher
             }
         }
 
-
+        // Обработчик события на нажатие кнопки "Начать".
         private void EnterButton_Click(object sender, EventArgs e)
         {
             Language lang;
@@ -170,9 +165,11 @@ namespace CaesarCypher
 
         }
 
+        // Перечисление для хранения выбранного RichTextBox.
         private enum Coursor { input, output }
         Coursor _coursor = Coursor.input;
 
+        // Обработчик события на выбор InputRichTextBox.
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = Coursor.input;
@@ -181,6 +178,7 @@ namespace CaesarCypher
 
         }
 
+        // Обработчик события на выбор OutputRichTextBox.
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = Coursor.output;

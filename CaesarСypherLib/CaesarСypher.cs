@@ -47,9 +47,9 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод зашифровки текста шифром Цезаря.
         /// </summary>
-        /// <param name="text">Входной текст типа char[]</param>
-        /// <param name="key">Ключ шифра типа int</param>
-        /// <param name="language">Язык исходного текста Language</param>
+        /// <param name="text">Входной текст</param>
+        /// <param name="key">Ключ шифра</param>
+        /// <param name="language">Язык исходного текста</param>
         /// <returns>Строка зашифрованного текст</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом входном тексте</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
@@ -110,9 +110,9 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод дешифровки текста шифром Цезаря.
         /// </summary>
-        /// <param name="text">Входной текст типа char[]</param>
-        /// <param name="key">Ключ шифра типа int</param>
-        /// <param name="language">Язык исходного текста Language</param>
+        /// <param name="text">Входной текст</param>
+        /// <param name="key">Ключ шифра</param>
+        /// <param name="language">Язык исходного текста</param>
         /// <returns>Строка дешифрованного текст</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом входном тексте</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
@@ -122,8 +122,8 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод поиска символа в словаре.
         /// </summary>
-        /// <param name="dictionary">Алфавит типа char[]</param>
-        /// <param name="c">искомый параметр типа char</param>
+        /// <param name="dictionary">Алфавит</param>
+        /// <param name="c">Искомый параметр</param>
         /// <returns>Индекс найденного элемента, -1 при отсутствии</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом словаре</exception>
         private static int FindIndex(char[] dictionary, char c)

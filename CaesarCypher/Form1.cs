@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Net.Mime.MediaTypeNames;
 using CaesarСypherLib;
 
 namespace CaesarCypher
@@ -23,6 +15,7 @@ namespace CaesarCypher
             LanguageСomboBox.SelectedIndex = 0;
         }
 
+        // Обработчик события на изменение выбора у SelectСomboBox и LanguageСomboBox, управляющее видимостью элементов
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             KeyPanel.Visible = true;
@@ -39,7 +32,7 @@ namespace CaesarCypher
             }
         }
 
-
+        // Обработчик события на нажатие кнопки "Шрифт".
         private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBox textBox = InputRichTextBox;
@@ -62,6 +55,7 @@ namespace CaesarCypher
             }
         }
 
+        // Обработчик события на нажатие кнопки "Цвет".
         private void ColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RichTextBox textBox = InputRichTextBox;
@@ -86,6 +80,7 @@ namespace CaesarCypher
 
         private string _filePath;
 
+        // Обработчик события на нажатие кнопки "Открыть".
         private void OpenFileToolStrip_Click(object sender, EventArgs e)
         {
             string text = "";
@@ -93,7 +88,6 @@ namespace CaesarCypher
 
             try
             {
-                openFileDialog1.FileName = _filePath;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     _filePath = openFileDialog1.FileName;
@@ -107,13 +101,14 @@ namespace CaesarCypher
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Ошибка чтения файла.\n" + exc.Message, "Взлома шифра Цезаря", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка чтения файла.\n" + exc.Message, this.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
             InputRichTextBox.SelectionStart = InputRichTextBox.TextLength;
         }
 
+        // Обработчик события на нажатие кнопки "Сохранить как".
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -143,6 +138,7 @@ namespace CaesarCypher
 
         }
 
+        // Обработчик события на нажатие кнопки "Начать".
         private void EnterButton_Click(object sender, EventArgs e)
         {
             OutputRichTextBox.Text = "";
@@ -170,18 +166,16 @@ namespace CaesarCypher
                 else if (SelectСomboBox.SelectedIndex == 3)
                 {
                     KeyLabel.Text = Hack(InputRichTextBox.Text, lang);
-                    int key = 0;
-                    
-                    if(Int32.TryParse(KeyLabel.Text, out key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
+
+                    if (Int32.TryParse(KeyLabel.Text, out int key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (ArgumentException) { MessageBox.Show("Поле ввода не заполнено", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
 
+        // Метод взлома шифра.
         private string Hack(string text, Language lang)
         {
             string key = "Неопределен.";
@@ -206,9 +200,12 @@ namespace CaesarCypher
             }
         }
 
+        // Перечисление для хранения выбранного RichTextBox.
         private enum Coursor { input, output }
         Coursor _coursor = Coursor.input;
 
+
+        // Обработчик события на выбор InputRichTextBox.
         private void InputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = Coursor.input;
@@ -217,6 +214,7 @@ namespace CaesarCypher
 
         }
 
+        // Обработчик события на выбор OutputRichTextBox.
         private void OutputRichTextBox_Enter(object sender, EventArgs e)
         {
             _coursor = Coursor.output;

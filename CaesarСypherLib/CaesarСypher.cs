@@ -143,8 +143,8 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод вычисления частотного анализа символов в тексте.
         /// </summary>
-        /// <param name="text">Входной текст для анализа типа string</param>
-        /// <param name="language">Выбор алфавита Language</param>
+        /// <param name="text">Входной текст для анализа</param>
+        /// <param name="language">Выбор алфавита</param>
         /// <returns>Словарь частотности, где ключ - буква алфавита, value - частоты использования в тексте в процентах</returns>
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
         /// <exception cref="ArgumentException">Исключение при пустой строке text</exception>
@@ -208,8 +208,8 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод взлома шифра Цезаря.
         /// </summary>
-        /// <param name="text">Входной текст типа string</param>
-        /// <param name="language">Язык исходного текста Language</param>
+        /// <param name="text">Входной текст</param>
+        /// <param name="language">Выбор языка текста</param>
         /// <param name="ignoreNotEnoughSymbolsException">Флаг для игнорирования исключения при недостаточном кол-ве символов для взлома шифра</param>
         /// <returns>Ключ шифра</returns>
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
@@ -256,8 +256,8 @@ namespace CaesarСypherLib
         /// <summary>
         /// Метод проверки полноты использования символов алфавита.
         /// </summary>
-        /// <param name="values">массив значений double[]</param>
-        /// <param name="language">язык алфавита Language</param>
+        /// <param name="values">Массив значений</param>
+        /// <param name="language">Язык алфавита</param>
         /// <returns>true - при достаточно полном использовании алфавита, иначе false</returns>
         /// <exception cref="ArgumentNullException">Исключение при пустом массиве</exception>
         private static bool IsItOkay(double[] values, Language language)
@@ -278,14 +278,14 @@ namespace CaesarСypherLib
 
 
         /// <summary>
-        /// Исключение, которое выдается, когда в тексте недостаточно символов для точного взлома шифра.
+        /// Исключение, которое выдается, когда набор символов в тексте слишком мал для точного взлома шифра.
         /// </summary>
         public class NotEnoughSymbolsException : Exception
         {
             /// <summary>
             /// Конструктор по-умолчанию.
             /// </summary>
-            public NotEnoughSymbolsException() : base("В тексте недостаточно символов для точного взлома шифра."){ }
+            public NotEnoughSymbolsException() : base("Набор символов в тексте слишком мал для точного взлома шифра."){ }
         }
 
         /// <summary>

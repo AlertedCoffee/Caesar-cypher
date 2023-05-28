@@ -12,11 +12,11 @@ namespace CaesarСypherLib
         /// <summary>
         /// Русский язык.
         /// </summary>
-        russian,
+        russian = 33,
         /// <summary>
         /// Английский язык.
         /// </summary>
-        english
+        english = 26
     }
 
     /// <summary>
@@ -206,10 +206,10 @@ namespace CaesarСypherLib
 
 
         /// <summary>
-        /// Метод взлома шифра Цезаря.
+        /// Метод взлома шифра Цезаря частотным анализом.
         /// </summary>
         /// <param name="text">Входной текст</param>
-        /// <param name="language">Выбор языка текста</param>
+        /// <param name="language">Язык шифра</param>
         /// <param name="ignoreNotEnoughSymbolsException">Флаг для игнорирования исключения при недостаточном кол-ве символов для взлома шифра</param>
         /// <returns>Ключ шифра</returns>
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
@@ -274,6 +274,33 @@ namespace CaesarСypherLib
             Console.WriteLine(Math.Round((double)counter / values.Length, 1));
 
             return (Math.Round((double)counter / values.Length, 1) >= 0.5);
+        }
+
+
+        /// <summary>
+        /// Метод взлома шифра Цезаря по известной части исходного текста.
+        /// </summary>
+        /// <param name="text">Входной текст</param>
+        /// <param name="knownPlainText">Известная часть исходного текста</param>
+        /// <param name="lang">Язык шифра</param>
+        /// <returns>Ключ текста или -1, если не удалось найти известную часть текста</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static int HackCypher(string text, string knownPlainText, Language lang)
+        {
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (text == "") throw new ArgumentException("text не может быть пустым");
+
+            if (knownPlainText == null) throw new ArgumentNullException(nameof(knownPlainText));
+            if (knownPlainText == "") throw new ArgumentException("knownPlainText не может быть пустым");
+
+
+
+            for (int i = 0; i < ((int)lang); i++)
+            {
+                int index = Decoder(text.ToCharArray(), i, lang).IndexOf(knownPlainText);
+                if (index != -1) return i;
+            }
+            return -1;
         }
 
 

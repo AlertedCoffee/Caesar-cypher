@@ -56,6 +56,7 @@
             this.StringKeyPanel = new System.Windows.Forms.Panel();
             this.KeyLabel = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
+            this.PlaintTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KeyNumericUpDown)).BeginInit();
             this.KeyPanel.SuspendLayout();
@@ -141,7 +142,8 @@
             "Выбор режима работы",
             "Зашифровка",
             "Дешифровка",
-            "Взлом"});
+            "Взлом частотным анализом",
+            "Взлом при известной части текста"});
             this.SelectСomboBox.Location = new System.Drawing.Point(150, 3);
             this.SelectСomboBox.Name = "SelectСomboBox";
             this.SelectСomboBox.Size = new System.Drawing.Size(191, 26);
@@ -307,6 +309,7 @@
             // 
             // StringKeyPanel
             // 
+            this.StringKeyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StringKeyPanel.Controls.Add(this.KeyLabel);
             this.StringKeyPanel.Controls.Add(this.Label1);
             this.StringKeyPanel.Location = new System.Drawing.Point(298, 530);
@@ -335,11 +338,23 @@
             this.Label1.TabIndex = 0;
             this.Label1.Text = "Ключ:";
             // 
+            // PlaintTextBox
+            // 
+            this.PlaintTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PlaintTextBox.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PlaintTextBox.Location = new System.Drawing.Point(44, 537);
+            this.PlaintTextBox.Name = "PlaintTextBox";
+            this.PlaintTextBox.Size = new System.Drawing.Size(170, 35);
+            this.PlaintTextBox.TabIndex = 12;
+            this.PlaintTextBox.Text = "Известная часть";
+            this.PlaintTextBox.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 587);
+            this.Controls.Add(this.PlaintTextBox);
             this.Controls.Add(this.StringKeyPanel);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.TextPanel);
@@ -350,7 +365,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Comic Sans MS", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(590, 260);
+            this.MinimumSize = new System.Drawing.Size(807, 634);
             this.Name = "Form1";
             this.Text = "Взлома шифра Цезаря";
             this.menuStrip1.ResumeLayout(false);
@@ -403,6 +418,7 @@
         private System.Windows.Forms.Panel StringKeyPanel;
         private System.Windows.Forms.Label KeyLabel;
         private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.TextBox PlaintTextBox;
     }
 }
 

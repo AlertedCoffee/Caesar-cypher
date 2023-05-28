@@ -20,16 +20,20 @@ namespace CaesarCypher
         {
             KeyPanel.Visible = true;
             StringKeyPanel.Visible = false;
+            PlaintTextBox.Visible = false;
             OutputRichTextBox.Text = "";
             KeyLabel.Text = "Неопределен.";
 
             if (SelectСomboBox.SelectedIndex != 0 && LanguageСomboBox.SelectedIndex != 0) EnterButton.Enabled = true;
             else EnterButton.Enabled = false;
-            if (SelectСomboBox.SelectedIndex == 3)
+
+            if (SelectСomboBox.SelectedIndex == 3 || SelectСomboBox.SelectedIndex == 4)
             {
                 KeyPanel.Visible = false;
                 StringKeyPanel.Visible = true;
             }
+
+            if (SelectСomboBox.SelectedIndex == 4) { PlaintTextBox.Visible = true; }
         }
 
         // Обработчик события на нажатие кнопки "Шрифт".
@@ -165,18 +169,24 @@ namespace CaesarCypher
                 }
                 else if (SelectСomboBox.SelectedIndex == 3)
                 {
-                    KeyLabel.Text = Hack(InputRichTextBox.Text, lang);
+                    KeyLabel.Text = FrequencyHack(InputRichTextBox.Text, lang);
+
+                    if (Int32.TryParse(KeyLabel.Text, out int key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
+                }
+                else if (SelectСomboBox.SelectedIndex == 4) 
+                {
+                    KeyLabel.Text = ExistingHack(InputRichTextBox.Text, PlaintTextBox.Text, lang);
 
                     if (Int32.TryParse(KeyLabel.Text, out int key)) OutputRichTextBox.Text = CaesarСypher.Decoder(InputRichTextBox.Text.ToCharArray(), key, lang);
                 }
             }
-            catch (ArgumentException) { MessageBox.Show("Поле ввода не заполнено", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (ArgumentException) { MessageBox.Show("Не все поля заполнены", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (Exception ex) { MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
 
-        // Метод взлома шифра.
-        private string Hack(string text, Language lang)
+        // Метод взлома шифра частотным анализом.
+        private string FrequencyHack(string text, Language lang)
         {
             string key = "Неопределен.";
 
@@ -199,6 +209,20 @@ namespace CaesarCypher
                 else return key;
             }
         }
+
+        // Метод взлома шифра при известной части исходного текста.
+        private string ExistingHack(string text, string knownPlainText, Language lang)
+        {
+            int key = CaesarСypher.HackCypher(text, knownPlainText, lang);
+
+            if (key == -1)
+            {
+                MessageBox.Show("Введенная часть текста не найдена в шифре.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "Неопределен.";
+            }
+            else return key.ToString();
+        }
+
 
         // Перечисление для хранения выбранного RichTextBox.
         private enum Coursor { input, output }

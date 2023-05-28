@@ -27,22 +27,22 @@ namespace CaesarСypherLib
         /// <summary>
         /// Набор букв русского алфавита в нижнем регистре.
         /// </summary>
-        private static string _russianDictiondry = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        private static string _russianDictionary = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 
         /// <summary>
         /// Набор букв русского алфавита в верхнем регистре. 
         /// </summary>
-        private static string _russianDictiondryUpper = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        private static string _russianDictionaryUpper = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
         /// <summary>
         /// Набор букв английского алфавита в нижнем регистре.
         /// </summary>
-        private static string _englishDictiondry = "abcdefghijklmnopqrstuvwxyz";
+        private static string _englishDictionary = "abcdefghijklmnopqrstuvwxyz";
 
         /// <summary>
         /// Набор букв английского алфавита в верхнем регистре. 
         /// </summary>
-        private static string _englishDictiondryUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static string _englishDictionaryUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace CaesarСypherLib
             switch (language)
             {
                 case Language.russian:
-                    dictionary = _russianDictiondry.ToCharArray();
-                    dictionaryUpper = _russianDictiondryUpper.ToCharArray();
+                    dictionary = _russianDictionary.ToCharArray();
+                    dictionaryUpper = _russianDictionaryUpper.ToCharArray();
                     break;
                 case Language.english:
-                    dictionary = _englishDictiondry.ToCharArray();
-                    dictionaryUpper = _englishDictiondryUpper.ToCharArray();
+                    dictionary = _englishDictionary.ToCharArray();
+                    dictionaryUpper = _englishDictionaryUpper.ToCharArray();
                     break;
             }
 
@@ -149,7 +149,7 @@ namespace CaesarСypherLib
         /// <exception cref="ArgumentNullException">Исключение при не инициализированном text</exception>
         /// <exception cref="ArgumentException">Исключение при пустой строке text</exception>
         /// <exception cref="InvalidLanguageException">Исключение при отсутствии символа в выбранном алфавите</exception>
-        public static Dictionary<char, double> FrequencyAnalysis(string text, Language language)
+        private static Dictionary<char, double> FrequencyAnalysis(string text, Language language)
         {
             if (text == null) throw new ArgumentNullException("text");
             if(text == "") throw new ArgumentException("text не может быть пустым");
@@ -161,10 +161,10 @@ namespace CaesarСypherLib
             switch (language)
             {
                 case Language.russian:
-                    dictionary = _russianDictiondry.ToCharArray();
+                    dictionary = _russianDictionary.ToCharArray();
                     break;
                 case Language.english:
-                    dictionary = _englishDictiondry.ToCharArray();
+                    dictionary = _englishDictionary.ToCharArray();
                     break;
             }
 
@@ -227,11 +227,11 @@ namespace CaesarСypherLib
             switch (language)
             {
                 case Language.russian:
-                    dictionary = _russianDictiondry.ToCharArray();
+                    dictionary = _russianDictionary.ToCharArray();
                     standartMostFrequentIndex = 15;
                     break;
                 case Language.english:
-                    dictionary = _englishDictiondry.ToCharArray();
+                    dictionary = _englishDictionary.ToCharArray();
                     standartMostFrequentIndex = 4;
                     break;
             }

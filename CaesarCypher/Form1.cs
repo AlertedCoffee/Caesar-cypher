@@ -15,6 +15,7 @@ namespace CaesarCypher
             LanguageСomboBox.SelectedIndex = 0;
         }
 
+
         // Обработчик события на изменение выбора у SelectСomboBox и LanguageСomboBox, управляющее видимостью элементов
         private void СomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -142,9 +143,25 @@ namespace CaesarCypher
 
         }
 
+        // Свойство для флага на показ предупреждения.
+        public bool DisclaimerShowFlag
+        {
+            set => _disclaimerShoWFlag = value;
+        }
+
+        private bool _disclaimerShoWFlag = true;
+
+
+
         // Обработчик события на нажатие кнопки "Начать".
         private void EnterButton_Click(object sender, EventArgs e)
         {
+            if (_disclaimerShoWFlag && SelectСomboBox.SelectedIndex == 3)
+            {
+                Disclaimer disclaimer = new Disclaimer(this);
+                disclaimer.ShowDialog();
+            }
+
             OutputRichTextBox.Text = "";
 
             Language lang;

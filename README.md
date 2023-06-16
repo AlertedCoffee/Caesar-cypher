@@ -1,6 +1,6 @@
 # CaesarСypher
 
-Is it course work project of application with functions for working with the Caesar Cypher:
+It is course work project of application with functions for working with the Caesar Cypher:
 - Coder
 - Decoder
 - Hack with frequency analysis
